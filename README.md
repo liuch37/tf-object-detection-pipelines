@@ -1,5 +1,5 @@
 # tf-object-detection-pipelines
-Customized pipelines of using TensorFlow object detection API [1].
+Customized pipelines of using TensorFlow object detection API [1] with TensorFlow 2.
 
 ## Installation
 Follow the steps in [2].
