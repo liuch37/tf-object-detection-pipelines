@@ -5,7 +5,7 @@ Customized pipelines of using TensorFlow object detection API [1].
 Follow the steps in [2].
 
 ## Command
-Modify the configurations inside each code.
+Modify the model configurations, data loading, data preprocessing,...etc inside each code.
 
 Train:
 ```
