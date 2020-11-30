@@ -7,6 +7,11 @@ Follow the steps in [2].
 ## Command
 Modify the configurations inside each code.
 
+Train:
+```
+python train.py
+```
+
 Inference:
 ```
 python inference.py
