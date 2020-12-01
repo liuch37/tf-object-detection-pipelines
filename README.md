@@ -52,3 +52,5 @@ where ${CHECKPOINT_DIR} points to the directory with checkpoints produced by the
 [2] https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/install.html
 
 [3] https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md
+
+[4] https://stackoverflow.com/questions/44707302/how-to-evaluate-a-pretrained-model-in-tensorflow-object-detection-api
