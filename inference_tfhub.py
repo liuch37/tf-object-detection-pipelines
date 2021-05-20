@@ -157,10 +157,26 @@ def run_detector(detector, image_path, label_path):
     display_image(image_with_boxes)
 
 
+def run_feature_extraction(feature_extractor, height, width, image_path):
+    img = load_img(image_path)
+
+    converted_img  = tf.image.convert_image_dtype(img, tf.float32)[tf.newaxis, ...]
+    converted_img = tf.image.resize(converted_img, [height, width])
+    start_time = time.time()
+    features = feature_extractor(converted_img)   # A batch with shape [batch_size, num_features].
+    end_time = time.time()
+
+    print("Inference time: ", end_time-start_time)
+
+    return features
+
+
 if __name__ == "__main__":
     # Configurations
     image_path = "./test_image/Naxos_Taverna.jpg"
-    module_handle = "./model/efficientdet_d0_1"
+    detection_module_handle = "./model/efficientdet_d6_1"
+    #feature_module_handle = "./model/efficientnet_b6_feature-vector_1"
+    feature_module_handle = "./model/resnet_50_feature_vector_1"
     label_path = "./util/coco-labels-paper.txt"
 
     # Print Tensorflow version
@@ -170,8 +186,15 @@ if __name__ == "__main__":
     print("The following GPU devices are available: %s" % tf.test.gpu_device_name())
 
     # load model
-    #detector = hub.load(module_handle).signatures['default'] # for Faster RCNN
-    detector = hub.load(module_handle) # for EfficientDet
+    #detector = hub.load(detection_module_handle).signatures['default'] # for Faster RCNN
+    detector = hub.load(detection_module_handle) # for EfficientDet
+
+    # feature vector extractor
+    feature_extractor = hub.load(feature_module_handle)
+    #height, width = 528, 528 # EfficientNet
+    height, width = 224, 224 # ResNet-50
+    features = run_feature_extraction(feature_extractor, height, width, image_path)
+    print(features.shape)
 
     # run inference
     run_detector(detector, image_path, label_path)
